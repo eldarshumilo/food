@@ -45,9 +45,9 @@ window.addEventListener('DOMContentLoaded', () => {
     function getTimeRemaining(endtime){
         const t = Date.parse(endtime) - Date.parse(new Date()),
               days = Math.floor(t / (1000*60*60*24)),
-              hours = Math.floor((t / 1000*60*60)%24),
+              hours = Math.floor((t / (1000*60*60))%24),
               minutes = Math.floor((t / 1000/60)%60),
-              seconds = Math.floor((t / 1000 )% 60);
+              seconds = Math.floor((t / 1000)%60);
 
         return{
             'total': t,
@@ -90,4 +90,37 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     setClock('.timer', deadLine);
+
+    //Modal
+
+    const btnModal = document.querySelectorAll('[data-modal]'),
+          modalWin = document.querySelector('.modal'),
+          modalClose = document.querySelector('[data-close]');
+
+    btnModal.forEach(btn =>{
+        btn.addEventListener('click', () => {
+            modalWin.classList.add('show');
+            modalWin.classList.remove('hide');
+            document.body.style.overflow = 'hidden';
+        });  
+    });
+    function closeModalWin() {
+        modalWin.classList.add('hide');
+        modalWin.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+    modalClose.addEventListener('click', closeModalWin);
+
+    modalWin.addEventListener('click', (e)=> {
+        if (e.target === modalWin){
+            closeModalWin();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Escape' && modalWin.classList.contains('show')){
+            closeModalWin();
+        }
+    });
+
 });
