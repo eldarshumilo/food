@@ -292,4 +292,5 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModalWin();
         }, 4000);
     }
+
 });
