@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function showTabContent(i = 0) {
         tabsContent[i].classList.add('show', 'fade');
-         tabsContent[i].classList.add('show');
         tabsContent[i].classList.remove('hide');
         tabs[i].classList.add('tabheader__item_active');
     }
@@ -310,4 +309,58 @@ window.addEventListener('DOMContentLoaded', () => {
     fetch('http://localhost:3000/menu')
         .then(data => data.json())
         .then(res=> console.log(res));
+
+
+
+    const countnext = document.querySelector('.offer__slider-next');
+    const countprev = document.querySelector('.offer__slider-prev');
+    const slides = document.querySelectorAll('.offer__slide');
+    const slide = Array.from(slides);
+    const current = document.querySelector('#current');
+
+
+   
+    function hideSlideContent() {
+        slide.forEach(item =>{
+            item.classList.add('hide');
+            item.classList.remove('show' ,'fade');
+        });
+    }
+
+    function showSlideContent(i = 0) {
+        slide[i].classList.remove('hide');
+        slide[i].classList.add('show', 'fade');
+        
+    }
+    hideSlideContent();
+    showSlideContent();
+
+    function slidesmove(){
+        slide.forEach(() => {
+            hideSlideContent();
+            showSlideContent(i);  
+        });
+        current.innerHTML = `0${i+1}`;
+    }
+
+    let i = 0;
+
+    countnext.addEventListener('click', () => {
+        if(i<3){
+            i++;
+            slidesmove();
+        } else {
+            i=0;
+            slidesmove();
+        }
+    });
+    countprev.addEventListener('click', () => {
+        if(i>0){
+            i--;
+            slidesmove();
+        } else {
+            i=3;
+            slidesmove();
+        }
+    });
 });
