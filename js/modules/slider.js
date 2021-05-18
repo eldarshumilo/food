@@ -1,14 +1,14 @@
-function slider(){
+function slider({container, slid, nextArrow, prevArrow, totalCounter}){
     fetch('http://localhost:3000/menu')
         .then(data => data.json())
         .then(res=> console.log(res));
 
-    const countnext = document.querySelector('.offer__slider-next');
-    const countprev = document.querySelector('.offer__slider-prev');
-    const slides = document.querySelectorAll('.offer__slide');
+    const countnext = document.querySelector(nextArrow);
+    const countprev = document.querySelector(prevArrow);
+    const slides = document.querySelectorAll(slid);
     const slide = Array.from(slides);
-    const current = document.querySelector('#current');
-    const slider = document.querySelector('.offer__slider');
+    const current = document.querySelector(totalCounter);
+    const slider = document.querySelector(container);
 
    
     function hideSlideContent() {
@@ -120,4 +120,4 @@ function slider(){
         });
     });
 }
-module.exports = slider;
+export default slider;
